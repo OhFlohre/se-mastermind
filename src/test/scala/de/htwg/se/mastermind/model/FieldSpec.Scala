@@ -18,12 +18,12 @@ class FieldSpec extends AnyWordSpec {
         }
         "created with a List of rows" should {
             val row1 = new Row(List(Color.Red, Color.Red, Color.Cyan, Color.Blue), Feedback(0,0))
-            val row2 = new Row(List(Color.Yellow, Color.Magenta, Color.Cyan, Color.Red, Feedback(0,0)))
+            val row2 = new Row(List(Color.Yellow, Color.Magenta, Color.Cyan, Color.Red), Feedback(0,0))
             val field = new Field(List(row1,row2))
 
             "have a method makeGuess" in {
-                val row3 = new Row(List(Color.Magenta, Color.Magenta, Color.Cyan, Color,Red), Feedback(0,0))
-                val newField = field.makeGuess(row3)
+                val combination = List(Color.Magenta, Color.Magenta, Color.Cyan, Color.Red)
+                val newField = field.makeGuess(combination)
                 newField.rows.length should be(3)
             }
         }
