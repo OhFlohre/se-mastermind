@@ -19,18 +19,18 @@ def getInputAndPrintLoop(field: Field): Unit =
         getInputAndPrintLoop(newfield)
 
     def parseInput(input: String): Option[Field] =
-    input match
-        case "q" => None
-        case _ => {
-        val chars = input.toCharArray.toList
-        val combination = chars.map(char => char match
-            case 'r' => Color.Red
-            case 'b' => Color.Blue
-            case 'g' => Color.Green
-            case 'c' => Color.Cyan
-            case 'm' => Color.Magenta
-            case 'y' => Color.Yellow
-            case _ => Color.White
-        ).take(4)
-        Some(field.makeGuess(combination))
-        }
+        input match
+            case "q" => None
+            case _ => {
+                val chars = input.toCharArray.toList
+                val combination = chars.map(char => char match
+                    case 'r' => Color.Red
+                    case 'b' => Color.Blue
+                    case 'g' => Color.Green
+                    case 'c' => Color.Cyan
+                    case 'm' => Color.Magenta
+                    case 'y' => Color.Yellow
+                    case _ => Color.White
+                ).take(4)
+                Some(field.makeGuess(combination))
+            }
