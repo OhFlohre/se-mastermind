@@ -14,7 +14,7 @@ class FeedbackSpec extends AnyWordSpec {
                 fb.correctPositions should be(3)
             }
             "have a String representation" in {
-                fb.toString should be("1 3")
+                fb.toString should be(Color.White.code + "1 3")
             }
         }
     }

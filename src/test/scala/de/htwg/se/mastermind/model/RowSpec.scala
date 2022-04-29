@@ -15,7 +15,7 @@ class RowSpec extends AnyWordSpec {
                 row.feedback.correctColors should be(0)
             }
             "have a String representation" in {
-                row.toString should be("0 0    " + (Color.White.toString + " ")*3 + Color.White.toString)
+                row.toString should be(Color.White.code + "0 0    " + (Color.White.toString + " ")*3 + Color.White.toString)
             }
         }
         "created with a fixed length of 5" should {
@@ -27,7 +27,7 @@ class RowSpec extends AnyWordSpec {
         "created with Guess and Feedback" should {
             val row = new Row(List(Color.Red, Color.Green, Color.Cyan, Color.Red), Feedback(2,2))
             "have a String representation" in {
-                row.toString should be("2 2    " + Color.Red.toString + " " + Color.Green.toString + " " + Color.Cyan.toString + " " + Color.Red.toString)
+                row.toString should be(Color.White.code + "2 2    " + Color.Red.toString + " " + Color.Green.toString + " " + Color.Cyan.toString + " " + Color.Red.toString)
             }
         }
     }

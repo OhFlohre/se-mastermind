@@ -21,10 +21,17 @@ class FieldSpec extends AnyWordSpec {
             val row2 = new Row(List(Color.Yellow, Color.Magenta, Color.Cyan, Color.Red), Feedback(0,0))
             val field = new Field(List(row1,row2))
 
-            "have a method makeGuess" in {
-                val combination = List(Color.Magenta, Color.Magenta, Color.Cyan, Color.Red)
-                val newField = field.makeGuess(combination)
+            "have a method append" in {
+                val row3 = Row(List(Color.Magenta, Color.Magenta, Color.Cyan, Color.Red),Feedback(0,0))
+                val newField = field.append(row3)
                 newField.rows.length should be(3)
+            }
+            "have a String representation" in {
+                val eol = sys.props("line.separator")
+                field.toString should equal (
+                    Color.White.code + "0 0    " + Color.Red.toString + " " + Color.Red.toString + " " + Color.Cyan.toString + " " + Color.Blue.toString + eol +
+                    Color.White.code + "0 0    " + Color.Yellow.toString + " " + Color.Magenta.toString + " " + Color.Cyan.toString + " " + Color.Red.toString
+                )
             }
         }
     }
