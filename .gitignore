@@ -3,4 +3,6 @@
 .vscode
 .metals
 .bloop
+.bsp
 target
+*.worksheet.sc
