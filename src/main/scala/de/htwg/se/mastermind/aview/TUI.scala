@@ -31,7 +31,7 @@ class TUI(controller: Controller) extends Observer:
                         case 'y' => Color.Yellow
                         case _ => Color.White
                 ).take(4)
-                    controller.makeGuess(combination)
+                    controller.doAndPublish(controller.makeGuess, combination)
                     println(controller.toString)
                     getInputAndPrintLoop()
             }
