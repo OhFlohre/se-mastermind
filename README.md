@@ -1,6 +1,6 @@
 ## sbt project compiled with Scala 3
 
-[![codecov](https://codecov.io/gh/OhFlohre/se-mastermind/branch/main/graph/badge.svg?token=1LV7VP5PEM)](https://codecov.io/gh/OhFlohre/se-mastermind)
+[![codecov](https://codecov.io/gh/OhFlohre/se-mastermind/branch/developer/graph/badge.svg?token=1LV7VP5PEM)](https://codecov.io/gh/OhFlohre/se-mastermind)
 
 ### Usage
 
