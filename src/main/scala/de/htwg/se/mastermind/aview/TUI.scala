@@ -12,26 +12,30 @@ class TUI(controller: Controller) extends Observer:
 
     def run =
         println(controller.field.toString)
-        getInputAndPrintLoop()
-
-    override def update: Unit = ()
-
-    def getInputAndPrintLoop(): Unit =
-        val input = readLine
+        inputLoop()
+    
+    def inputLoop(): Unit =
+        parseInput(readLine) match
+            case None => println("invalid input")
+            case Some(guess) => controller.doAndPublish(controller.makeGuess, guess)
+        inputLoop()
+    
+    def parseInput(input: String): Option[List[Color]] = 
         input match
-                case "q" => 
-                case _ => {
-                    val chars = input.toCharArray.toList
-                    val combination = chars.map(char => char match
-                        case 'r' => Color.Red
-                        case 'b' => Color.Blue
-                        case 'g' => Color.Green
-                        case 'c' => Color.Cyan
-                        case 'm' => Color.Magenta
-                        case 'y' => Color.Yellow
-                        case _ => Color.White
+            case _ => {
+                val chars = input.toCharArray.toList
+                val guess = chars.map(char => char match
+                case 'r' => Color.Red
+                case 'b' => Color.Blue
+                case 'g' => Color.Green
+                case 'c' => Color.Cyan
+                case 'm' => Color.Magenta
+                case 'y' => Color.Yellow
+                case _ => Color.White
                 ).take(4)
-                    controller.doAndPublish(controller.makeGuess, combination)
-                    println(controller.toString)
-                    getInputAndPrintLoop()
+
+                if(guess.length < 4) None
+                else Some(guess)
             }
+    
+    override def update = println(controller.field.toString)
