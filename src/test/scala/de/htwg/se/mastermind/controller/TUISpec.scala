@@ -23,12 +23,7 @@ class ControllerSpec extends AnyWordSpec {
 
         "parse input rr to None" in {
             val input = "rr"
-            tui.parseInput(input) should equal None
-        }
-
-        "parse input kkkk to None" in {
-            val input = "kkkk"
-            tui.parseInput(input) should equal None
+            tui.parseInput(input) should equal(None)
         }
     }
 }
