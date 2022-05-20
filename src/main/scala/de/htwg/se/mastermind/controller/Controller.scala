@@ -9,11 +9,13 @@ import model.Color
 import util.Observable
 
 case class Controller(var field: Field) extends Observable:
+    val solution = new Combination(List(Color.Red, Color.Cyan, Color.Red, Color.Yellow))
+
     def doAndPublish(func: Combination => Field, guess: Combination): Unit =
         field = func(guess)
         notifyObservers
 
     def makeGuess(guess: Combination) =
-        field.append(Row(guess, Feedback(0,0)))
+        field.append(Row(guess, Feedback(solution,guess)))
 
     override def toString: String = field.toString
