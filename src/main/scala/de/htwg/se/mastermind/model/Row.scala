@@ -1,6 +1,5 @@
 package de.htwg.se.mastermind.model
 
-case class Row(guess: List[Color], feedback: Feedback):
-    def this(num_entries: Int = 4) = this(List.fill(num_entries)(Color.White), Feedback(0,0))
+case class Row(guess: Combination, feedback: Feedback):
     override def toString: String = 
-        feedback.toString + " "*4 + guess.mkString(" ")
+        feedback.toString + " "*4 + guess.data.mkString(" ")

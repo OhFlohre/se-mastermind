@@ -6,6 +6,7 @@ import scala.io.StdIn.readLine
 import util.Observer
 import controller.Controller
 import model.Color
+import model.Combination
 
 class TUI(controller: Controller) extends Observer:
     controller.add(this)
@@ -20,7 +21,7 @@ class TUI(controller: Controller) extends Observer:
             case Some(guess) => controller.doAndPublish(controller.makeGuess, guess)
         inputLoop()
     
-    def parseInput(input: String): Option[List[Color]] = 
+    def parseInput(input: String): Option[Combination] = 
         input match
             case _ => {
                 val chars = input.toCharArray.toList
@@ -35,7 +36,7 @@ class TUI(controller: Controller) extends Observer:
                 ).take(4)
 
                 if(guess.length < 4) None
-                else Some(guess)
+                else Some(Combination(guess))
             }
     
     override def update = println(controller.field.toString)
