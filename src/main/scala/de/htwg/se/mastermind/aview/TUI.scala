@@ -7,6 +7,8 @@ import util.Observer
 import controller.Controller
 import model.Color
 import model.Combination
+import scala.util.Success
+import scala.util.Failure
 
 class TUI(controller: Controller) extends Observer:
     controller.add(this)
@@ -17,12 +19,15 @@ class TUI(controller: Controller) extends Observer:
     
     def inputLoop(): Unit =
         parseInput(readLine) match
-            case None => println("invalid input")
+            case None =>
             case Some(guess) => controller.doAndPublish(controller.makeGuess, guess)
         inputLoop()
     
-    def parseInput(input: String): Option[Combination] = 
+    def parseInput(input: String): Option[Combination] =
         input match
+            case "a" => controller.doAndPublish(controller.undo); None
+            case "d" => controller.doAndPublish(controller.redo); None
+            case "q" => None
             case _ => {
                 val chars = input.toCharArray.toList
                 val guess = chars.map(char => char match
