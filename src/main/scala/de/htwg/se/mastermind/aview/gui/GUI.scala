@@ -19,9 +19,10 @@ class GUI(controller: Controller) extends JFXApp3, Observer  {
 
         stage = new JFXApp3.PrimaryStage {
             title = "Mastermind"
-            width = 600
-            height = 450
+            width = 800
+            height = 600
             scene = new Scene {
+                fill = Theme.background_dark
                 content = new BorderPane {
                     center = new FieldView(controller)
                     bottom = new SelectionView(controller)
@@ -33,6 +34,7 @@ class GUI(controller: Controller) extends JFXApp3, Observer  {
     override def update: Unit = {
         Platform.runLater {
             stage.scene = new Scene {
+                fill = Theme.background_dark
                 content = new BorderPane {
                     center = new FieldView(controller)
                     bottom = new SelectionView(controller)

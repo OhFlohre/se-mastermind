@@ -32,7 +32,8 @@ class SelectionView(controller: Controller) extends HBox {
         converter = StringConverter.toStringConverter((color: Color) => color.name)
         selectionModel.value.selectFirst()
     }
-
+    this.prefWidth = 800
+    this.prefHeight = 100
     this.children = Seq(
         selector1,
         selector2,

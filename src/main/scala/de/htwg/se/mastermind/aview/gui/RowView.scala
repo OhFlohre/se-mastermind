@@ -3,7 +3,7 @@ package aview
 
 
 import scalafx.scene.layout._
-import scalafx.scene.text._
+import scalafx.geometry._
 import scalafx.scene.shape._
 import scalafx.scene.paint.Color._
 

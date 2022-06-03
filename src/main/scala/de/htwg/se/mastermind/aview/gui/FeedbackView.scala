@@ -4,6 +4,7 @@ package aview
 
 import scalafx.scene.layout._
 import scalafx.scene.shape._
+import scalafx.geometry._
 import scalafx.scene.paint.Color._
 
 import controller.Controller
@@ -17,12 +18,17 @@ class FeedbackView(feedback: Feedback) extends GridPane {
     })
     val correctColorPins = List.fill(feedback.correctColors)(new Circle{
         radius = 10
-        fill = Red
+        fill = White
     })
 
-    println(correctColorPins)
-    println(correctColorPins)
-    //this.add(correctPositionPins)
-    //this.add(correctPositionPins)
+    val pins = correctPositionPins ++ correctColorPins
+    this.padding = Insets(5)
+    this.hgap = 5
+    this.vgap = 5
+    this.minWidth = 60
+    pins.zipWithIndex.foreach { case (pin, i) =>
+        this.add(pin, i % 2, i / 2)
+    }
+    
 
 }
