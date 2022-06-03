@@ -8,11 +8,11 @@ import scalafx.scene.layout.BorderPane
 import scalafx.scene.Scene
 import scalafx.scene.web._
 
-import controller.Controller
+import controller.ControllerInterface
 import util.Observer
 
 
-class GUI(controller: Controller) extends JFXApp3, Observer  {
+class GUI(controller: ControllerInterface) extends JFXApp3, Observer  {
     controller.add(this)
 
     override def start(): Unit = {

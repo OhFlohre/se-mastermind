@@ -1,4 +1,6 @@
-package de.htwg.se.mastermind.model
+package de.htwg.se.mastermind
+package model
+package fieldBaseImpl
 
 enum Color(val code: String, val name: String):
     override def toString: String = code + "#" + Color.White.code

@@ -7,12 +7,12 @@ import scalafx.geometry._
 import scalafx.scene.shape._
 import scalafx.scene.paint.Color._
 
-import controller.Controller
-import model.Color
-import model.Row
+
+import model.fieldBaseImpl.Color
+import model.RowInterface
 
 
-class RowView(row: Row) extends HBox {
+class RowView(row: RowInterface) extends HBox {
 
     this.children = Seq(
         new FeedbackView(row.feedback),

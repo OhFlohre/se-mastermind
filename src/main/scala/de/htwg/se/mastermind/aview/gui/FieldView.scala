@@ -5,11 +5,11 @@ package aview
 import scalafx.scene.layout._
 import scalafx.scene.control._
 
-import controller.Controller
-import model.Color
+import controller.ControllerInterface
+import model.fieldBaseImpl.Color
 
 
-class FieldView(controller: Controller) extends ScrollPane{
+class FieldView(controller: ControllerInterface) extends ScrollPane{
     this.setStyle("-fx-background: " + Theme.background)
     this.prefWidth = 800
     this.prefHeight = 500

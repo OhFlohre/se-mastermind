@@ -4,13 +4,14 @@ package aview
 import scala.io.StdIn.readLine
 
 import util.Observer
-import controller.Controller
-import model.Color
-import model.Combination
+import controller.ControllerInterface
+import model.CombinationInterface
+import model.fieldBaseImpl.Color
+import model.fieldBaseImpl.Combination
 import scala.util.Success
 import scala.util.Failure
 
-class TUI(controller: Controller) extends Observer:
+class TUI(controller: ControllerInterface) extends Observer:
     controller.add(this)
 
     def run =
@@ -23,7 +24,7 @@ class TUI(controller: Controller) extends Observer:
             case Some(guess) => controller.doAndPublish(controller.makeGuess, guess)
         inputLoop()
     
-    def parseInput(input: String): Option[Combination] =
+    def parseInput(input: String): Option[CombinationInterface] =
         input match
             case "a" => controller.doAndPublish(controller.undo); None
             case "d" => controller.doAndPublish(controller.redo); None

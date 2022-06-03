@@ -9,12 +9,12 @@ import scalafx.scene.text._
 import scalafx.scene.control._
 import scalafx.util.StringConverter
 
-import controller.Controller
-import model.Color
-import model.Combination
+import controller.ControllerInterface
+import model.fieldBaseImpl.Color
+import model.fieldBaseImpl.Combination
 
 
-class SelectionView(controller: Controller) extends HBox {
+class SelectionView(controller: ControllerInterface) extends HBox {
 
     val selector1 = new ComboBox[Color](Color.all.toSeq) {
         converter = StringConverter.toStringConverter((color: Color) => color.name)
@@ -42,7 +42,6 @@ class SelectionView(controller: Controller) extends HBox {
         new Button{
             text="Submit"
             onMouseClicked = handle{
-                println(selector1.value.apply())
                 controller.doAndPublish(controller.makeGuess, Combination(List(
                     selector1.value.apply(),
                     selector2.value.apply(),

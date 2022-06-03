@@ -2,8 +2,8 @@ package de.htwg.se.mastermind
 
 import aview.TUI
 import aview.GUI
-import controller.Controller
-import model.Field
+import controller.controllerBaseImpl.Controller
+import model.fieldBaseImpl.Field
 
 @main def main: Unit = 
     val field = new Field()
