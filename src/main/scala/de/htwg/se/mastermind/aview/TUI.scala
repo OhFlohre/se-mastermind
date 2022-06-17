@@ -5,9 +5,7 @@ import scala.io.StdIn.readLine
 
 import util.Observer
 import controller.ControllerInterface
-import model.CombinationInterface
 import model.fieldBaseImpl.Color
-import model.fieldBaseImpl.Combination
 import scala.util.Success
 import scala.util.Failure
 
@@ -24,7 +22,7 @@ class TUI(controller: ControllerInterface) extends Observer:
             case Some(guess) => controller.doAndPublish(controller.makeGuess, guess)
         inputLoop()
     
-    def parseInput(input: String): Option[CombinationInterface] =
+    def parseInput(input: String): Option[List[Color]] =
         input match
             case "a" => controller.doAndPublish(controller.undo); None
             case "d" => controller.doAndPublish(controller.redo); None
@@ -42,7 +40,7 @@ class TUI(controller: ControllerInterface) extends Observer:
                 ).take(4)
 
                 if(guess.length < 4) None
-                else Some(Combination(guess))
+                else Some(guess)
             }
     
     override def update = println(controller.field.toString)

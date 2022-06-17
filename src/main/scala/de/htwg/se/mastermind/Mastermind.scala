@@ -1,7 +1,7 @@
 package de.htwg.se.mastermind
 
 import aview.TUI
-import aview.GUI
+// import aview.GUI
 import controller.controllerBaseImpl.Controller
 import model.fieldBaseImpl.Field
 
@@ -10,11 +10,11 @@ import model.fieldBaseImpl.Field
     val controller = Controller(field)
     //controller.add(GUI)
     val tui = TUI(controller)
-    val gui = GUI(controller)
-    val guiThread = new Thread {
+    /*val gui = GUI(controller)
+     val guiThread = new Thread {
         override def run: Unit = {
             gui.main(Array[String]())
         }
     }
-    guiThread.start()
+    guiThread.start() */
     tui.run

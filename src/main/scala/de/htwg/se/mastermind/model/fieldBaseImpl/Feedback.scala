@@ -6,18 +6,18 @@ case class Feedback(correctPositions: Int, correctColors: Int) extends FeedbackI
     override def toString: String = Color.White.code + correctPositions + " " + correctColors
 
 object Feedback {
-    def apply(solution: CombinationInterface, guess: CombinationInterface) : Feedback = 
+    def apply(solution: List[Color], guess: List[Color]) : Feedback = 
         val (correctPosition, correctColors) = generateFromGuess(solution, guess)
         new Feedback(correctPosition, correctColors)
 
-    def generateFromGuess(solution: CombinationInterface, guess: CombinationInterface): (Int,Int) = 
+    def generateFromGuess(solution: List[Color], guess: List[Color]): (Int,Int) = 
         val solutionCopy = solution
         var correctPositions = 0
         var correctColors = 0
 
-        guess.data.zipWithIndex.foreach{case (color, i) => 
-            if(solutionCopy.data.contains(color))
-                if(i == solution.data.indexOf(color)) correctPositions = correctPositions + 1
+        guess.zipWithIndex.foreach{case (color, i) => 
+            if(solutionCopy.contains(color))
+                if(i == solution.indexOf(color)) correctPositions = correctPositions + 1
                 else correctColors = correctColors + 1
         }
 

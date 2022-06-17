@@ -24,8 +24,8 @@ case class Controller(var field: FieldInterface) extends ControllerInterface:
         field = func
         notifyObservers
     
-    def makeGuess(guess: CombinationInterface): FieldInterface =
-        undoManager.doStep(field, MakeGuessCommand(solution, guess))
+    def makeGuess(guess: List[Color]): FieldInterface =
+        undoManager.doStep(field, MakeGuessCommand(solution, Combination(guess)))
         field.append(Row(guess, Feedback(solution,guess)))
 
     def undo: FieldInterface = undoManager.undoStep(field)

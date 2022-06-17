@@ -2,7 +2,6 @@ package de.htwg.se.mastermind
 package model
 
 import fieldBaseImpl.Color
-import fieldBaseImpl.Combination
 
 trait FieldInterface {
     val rows: List[RowInterface]
@@ -13,7 +12,7 @@ trait FieldInterface {
 
 trait RowInterface {
     val feedback: FeedbackInterface
-    val guess: CombinationInterface
+    val guess: List[String]
     def toString(): String
 }
 
@@ -21,8 +20,4 @@ trait FeedbackInterface {
     val correctPositions: Int
     val correctColors: Int
     def toString(): String
-}
-
-trait CombinationInterface {
-    val data: List[Color]
 }
