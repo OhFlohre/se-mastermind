@@ -14,7 +14,6 @@ import model.FieldInterface
     //val field = Field()
     //val controller = Controller(field)
     val injector = Guice.createInjector(new MastermindModule)
-    val field = injector.getInstance(classOf[FieldInterface])
     val controller = injector.getInstance(classOf[ControllerInterface])
 
     val tui = TUI(controller)

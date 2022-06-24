@@ -6,7 +6,7 @@ package fieldBaseImpl
 import com.google.inject.Inject
 
 
-case class Field @Inject() (rows: List[Row] = List()):
+case class Field(rows: List[Row] = List()) extends FieldInterface:
     val eol = sys.props("line.separator")
 
     def append(row: Row) = copy(rows:+row)
