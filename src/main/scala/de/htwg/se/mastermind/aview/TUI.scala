@@ -36,7 +36,6 @@ class TUI(controller: ControllerInterface) extends Observer:
                 case 'c' => Color.Cyan
                 case 'm' => Color.Magenta
                 case 'y' => Color.Yellow
-                case _ => Color.White
                 ).take(4)
 
                 if(guess.length < 4) None

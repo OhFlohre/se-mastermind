@@ -1,23 +1,13 @@
 package de.htwg.se.mastermind
 package model
 
-import fieldBaseImpl.Color
+
+import fieldBaseImpl.{Color, Row}
+
 
 trait FieldInterface {
-    val rows: List[RowInterface]
-    def append(row: RowInterface): FieldInterface
-    def remove(): FieldInterface
-    def toString(): String
-}
-
-trait RowInterface {
-    val feedback: FeedbackInterface
-    val guess: List[String]
-    def toString(): String
-}
-
-trait FeedbackInterface {
-    val correctPositions: Int
-    val correctColors: Int
+    val rows: List[Row]
+    def append(row: Row): FieldInterface
+    def removeLast(): FieldInterface
     def toString(): String
 }

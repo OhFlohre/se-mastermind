@@ -2,21 +2,22 @@ package de.htwg.se.mastermind
 package controller
 package controllerBaseImpl
 
+
+import com.google.inject.Inject
+
 import model.FieldInterface
-import model.CombinationInterface
 import model.fieldBaseImpl.Row
-import model.fieldBaseImpl.Combination
 import model.fieldBaseImpl.Feedback
 import model.fieldBaseImpl.Color
 import util.Observable
 import util.UndoManager
 import util.Command
 
-case class Controller(var field: FieldInterface) extends ControllerInterface:
+case class Controller @Inject() (var field: FieldInterface) extends ControllerInterface:
     val undoManager = new UndoManager[FieldInterface]
-    val solution = new Combination(List(Color.Red, Color.Cyan, Color.Red, Color.Yellow))
+    val solution = List(Color.Red, Color.Cyan, Color.Red, Color.Yellow)
 
-    def doAndPublish(func: CombinationInterface => FieldInterface, guess: CombinationInterface): Unit =
+    def doAndPublish(func: List[Color] => FieldInterface, guess: List[Color]): Unit =
         field = func(guess)
         notifyObservers
 
@@ -25,7 +26,7 @@ case class Controller(var field: FieldInterface) extends ControllerInterface:
         notifyObservers
     
     def makeGuess(guess: List[Color]): FieldInterface =
-        undoManager.doStep(field, MakeGuessCommand(solution, Combination(guess)))
+        undoManager.doStep(field, MakeGuessCommand(solution, guess))
         field.append(Row(guess, Feedback(solution,guess)))
 
     def undo: FieldInterface = undoManager.undoStep(field)

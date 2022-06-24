@@ -11,6 +11,8 @@ libraryDependencies += "org.scalactic" %% "scalactic" % "3.2.11"
 libraryDependencies += "org.scalatest" %% "scalatest" % "3.2.11" % "test"
 libraryDependencies += "org.scalafx" %% "scalafx" % "16.0.0-R24"
 libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "3.0.0"
+libraryDependencies += "com.google.inject" % "guice" % "5.1.0"
+libraryDependencies += ( "net.codingwell" %% "scala-guice" % "5.0.2" ).cross( CrossVersion.for3Use2_13 )
 
 libraryDependencies ++= {
   // Determine OS version of JavaFX binaries

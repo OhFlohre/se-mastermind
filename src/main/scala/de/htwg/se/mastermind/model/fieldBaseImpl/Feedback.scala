@@ -2,8 +2,8 @@ package de.htwg.se.mastermind
 package model
 package fieldBaseImpl
 
-case class Feedback(correctPositions: Int, correctColors: Int) extends FeedbackInterface:
-    override def toString: String = Color.White.code + correctPositions + " " + correctColors
+case class Feedback(correctPositions: Int, correctColors: Int):
+    override def toString: String = Console.WHITE + correctPositions + " " + correctColors
 
 object Feedback {
     def apply(solution: List[Color], guess: List[Color]) : Feedback = 

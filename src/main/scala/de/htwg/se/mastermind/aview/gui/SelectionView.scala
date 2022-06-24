@@ -11,7 +11,6 @@ import scalafx.util.StringConverter
 
 import controller.ControllerInterface
 import model.fieldBaseImpl.Color
-import model.fieldBaseImpl.Combination
 
 
 class SelectionView(controller: ControllerInterface) extends HBox {
@@ -42,11 +41,11 @@ class SelectionView(controller: ControllerInterface) extends HBox {
         new Button{
             text="Submit"
             onMouseClicked = handle{
-                controller.doAndPublish(controller.makeGuess, Combination(List(
+                controller.doAndPublish(controller.makeGuess, List(
                     selector1.value.apply(),
                     selector2.value.apply(),
                     selector3.value.apply(),
-                    selector4.value.apply())))
+                    selector4.value.apply()))
             }
         }
     )
