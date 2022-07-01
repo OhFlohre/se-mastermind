@@ -10,7 +10,7 @@ import scala.io.Source
 import java.io.PrintWriter
 
 import field.IField
-import field.fieldBaseImpl.{Field, Row, Color, Feedback}
+import field.fieldBaseImpl.{Field, Row, Color, Feedback, State}
 
 
 class FileIO @Inject() extends IFileIO:
@@ -18,13 +18,15 @@ class FileIO @Inject() extends IFileIO:
         val file: String = Source.fromFile("field.json").getLines.mkString
         val json = Json.parse(file)
         val solution = (json \ "field" \ "solution").get.as[List[Int]].map(Color.fromOrdinal(_))
+        val size = (json \ "field" \ "size").as[Int]
+        val state = (json \ "field" \ "state").as[Int]
         val rows = (json \ "field" \ "rows").get.as[List[JsValue]].map(row =>
             val guess = (row \ "guess").get.as[List[Int]].map(Color.fromOrdinal(_))
             val correctPositions = (row \ "correctPositions").as[Int]
             val correctColors = (row \ "correctColors").as[Int]
             Row(guess, Feedback(correctPositions, correctColors))
         )
-        Field(rows, solution)
+        Field(rows, solution, size, State.fromOrdinal(state))
     }
 
     override def save(field: IField): Unit = {
@@ -37,12 +39,14 @@ class FileIO @Inject() extends IFileIO:
     def fieldToJSON(field: IField) = {
         Json.obj(
             "field" -> Json.obj(
-                "solution" -> Json.arr(field.solution.map(color => JsNumber(color.ordinal))),
+                "state" -> JsNumber(field.state.ordinal),
+                "size" -> JsNumber(field.size),
+                "solution" -> JsArray(field.solution.map(color => JsNumber(color.ordinal))),
                 "rows" -> JsArray(field.rows.map(row =>
                     Json.obj(
-                        "guess" -> Json.arr(row.guess.map(color => JsNumber(color.ordinal))),
+                        "guess" -> JsArray(row.guess.map(color => JsNumber(color.ordinal))),
                         "correctPositions" -> JsNumber(row.feedback.correctPositions),
-                        "correctColors" -> JsNumber(row.feedback.correctPositions)
+                        "correctColors" -> JsNumber(row.feedback.correctColors)
                     )
                 ))
             ) 

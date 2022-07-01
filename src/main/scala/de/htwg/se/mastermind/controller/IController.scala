@@ -9,7 +9,7 @@ import model.field.IField
 
 trait IController extends Observable {
     var field : IField
-    def createField() : IField
+    def createField: IField
     def makeGuess(guess: List[Color]) : IField
     def undo: IField
     def redo: IField

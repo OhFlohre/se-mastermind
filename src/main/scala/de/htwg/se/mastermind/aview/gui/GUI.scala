@@ -21,25 +21,13 @@ class GUI(controller: IController) extends JFXApp3, Observer  {
             title = "Mastermind"
             width = 800
             height = 600
-            scene = new Scene {
-                fill = Theme.background_dark
-                content = new BorderPane {
-                    center = new FieldView(controller)
-                    bottom = new SelectionView(controller)
-                }
-            }
+            scene = new MainScene(controller)
         }
     }
 
     override def update: Unit = {
         Platform.runLater {
-            stage.scene = new Scene {
-                fill = Theme.background_dark
-                content = new BorderPane {
-                    center = new FieldView(controller)
-                    bottom = new SelectionView(controller)
-                }
-            }
+            stage.scene = new MainScene(controller)
             stage.show()
         }
   }

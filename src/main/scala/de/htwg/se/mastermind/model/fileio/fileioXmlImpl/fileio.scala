@@ -9,7 +9,7 @@ import com.google.inject.{Inject, Guice}
 import java.io.PrintWriter
 
 import field.IField
-import field.fieldBaseImpl.{Field, Row,Color, Feedback}
+import field.fieldBaseImpl.{Field, Row,Color, Feedback, State}
 
 
 class FileIO @Inject() extends IFileIO:
@@ -17,6 +17,8 @@ class FileIO @Inject() extends IFileIO:
         val injector = Guice.createInjector(new MastermindModule)
         val file = XML.loadFile("field.xml")
         val solution = (file \\ "solution" \\ "color").map(color => Color.fromOrdinal(color.text.toInt)).toList
+        val size = (file \\ "@size").text.toInt
+        val state = (file \\ "@state").text.toInt
         val rows = (file \\ "row").map(row => 
             val colors = (row \\ "color").map(color => Color.fromOrdinal(color.text.toInt)).toList
             val correctPositions = (row \\ "@correctPositions").text.toInt
@@ -24,7 +26,7 @@ class FileIO @Inject() extends IFileIO:
             Row(colors, Feedback(correctPositions, correctColors))
         ).toList
 
-        Field(rows)
+        Field(rows, solution, size, State.fromOrdinal(state))
     }
 
     override def save(field: IField): Unit = {
@@ -36,7 +38,7 @@ class FileIO @Inject() extends IFileIO:
     }
 
     def fieldToXML(field: IField) = {
-        <field>
+        <field size={field.size.toString} state={field.state.ordinal.toString}>
             <solution>
                 {field.solution.map(color => <color>{color.ordinal}</color>)}
             </solution>

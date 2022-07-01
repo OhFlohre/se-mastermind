@@ -3,12 +3,14 @@ package model
 package field
 
 
-import fieldBaseImpl.{Color}
+import fieldBaseImpl.{Color, State}
 
 
 trait IField {
     val rows: List[IRow]
     val solution: List[Color]
+    val size: Int
+    val state: State
     def setRows(rows: List[IRow]): IField
     def append(row: IRow): IField
     def removeLast(): IField

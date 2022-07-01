@@ -13,15 +13,18 @@ object Feedback {
         Feedback(correctPosition, correctColors)
 
     def generateFromGuess(solution: List[Color], guess: List[Color]): (Int,Int) = 
-        val solutionCopy = solution
+        var usedIndecies: List[Int] = List()
         var correctPositions = 0
         var correctColors = 0
 
-        guess.zipWithIndex.foreach{case (color, i) => 
-            if(solutionCopy.contains(color))
-                if(i == solution.indexOf(color)) correctPositions = correctPositions + 1
-                else correctColors = correctColors + 1
+        for (i <- 0 until 4) {
+            if (guess(i) == solution(i))
+                correctPositions += 1
+                usedIndecies = usedIndecies:+i
+            else if (guess.contains(solution(i)) && !usedIndecies.contains(i)) 
+                correctColors +=1
+                usedIndecies = usedIndecies:+i
         }
 
-        (correctPositions, correctColors)
+        (correctPositions,correctColors)
 }

@@ -24,7 +24,7 @@ case class Controller @Inject() (var field: IField) extends IController:
         field = func
         notifyObservers
     
-    def createField(): IField = Field()
+    def createField: IField = Field()
 
     def makeGuess(guess: List[Color]): IField =
         undoManager.doStep(field, MakeGuessCommand(guess))
