@@ -20,6 +20,7 @@ class RestartView(controller: IController) extends HBox {
         new Text(controller.field.state match
             case State.Won => "You won the game!!!"
             case State.Lost => "You lost the game :("
+            case _ => ""
         ),
         new Button{
             text="Restart"
