@@ -41,8 +41,10 @@ class TUI(controller: IController) extends Observer:
                     case 'y' => Color.Yellow
                 )
 
-                if(guess.length < 4) println("invalid input"); None
-                Some(guess)
+                if(guess.size != 4)
+                    println("invalid input")
+                    None
+                else Some(guess)
             }
     
     override def update = 
