@@ -6,3 +6,5 @@
 .bsp
 target
 *.worksheet.sc
+field.xml
+field.json

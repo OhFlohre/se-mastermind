@@ -1,14 +1,16 @@
 package de.htwg.se.mastermind
 package model
+package field
 package fieldBaseImpl
 
-case class Feedback(correctPositions: Int, correctColors: Int):
+
+case class Feedback (correctPositions: Int, correctColors: Int) extends IFeedback:
     override def toString: String = Console.WHITE + correctPositions + " " + correctColors
 
 object Feedback {
-    def apply(solution: List[Color], guess: List[Color]) : Feedback = 
+    def apply(solution: List[Color], guess: List[Color]) : IFeedback = 
         val (correctPosition, correctColors) = generateFromGuess(solution, guess)
-        new Feedback(correctPosition, correctColors)
+        Feedback(correctPosition, correctColors)
 
     def generateFromGuess(solution: List[Color], guess: List[Color]): (Int,Int) = 
         val solutionCopy = solution

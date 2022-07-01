@@ -3,33 +3,45 @@ package controller
 package controllerBaseImpl
 
 
-import com.google.inject.Inject
+import com.google.inject.{Inject, Guice}
+import net.codingwell.scalaguice.InjectorExtensions.ScalaInjector
 
-import model.FieldInterface
-import model.fieldBaseImpl.Row
-import model.fieldBaseImpl.Feedback
-import model.fieldBaseImpl.Color
+import model.field.IField
+import model.field.fieldBaseImpl.{Field, Row, Feedback, Color}
+import model.fileio.IFileIO
 import util.Observable
 import util.UndoManager
 import util.Command
 
-case class Controller @Inject() (var field: FieldInterface) extends ControllerInterface:
-    val undoManager = new UndoManager[FieldInterface]
-    val solution = List(Color.Red, Color.Cyan, Color.Red, Color.Yellow)
+case class Controller @Inject() (var field: IField) extends IController:
+    val undoManager = new UndoManager[IField]
 
-    def doAndPublish(func: List[Color] => FieldInterface, guess: List[Color]): Unit =
+    def doAndPublish(func: List[Color] => IField, guess: List[Color]): Unit =
         field = func(guess)
         notifyObservers
 
-    def doAndPublish(func: => FieldInterface): Unit =
+    def doAndPublish(func: => IField): Unit =
         field = func
         notifyObservers
     
-    def makeGuess(guess: List[Color]): FieldInterface =
-        undoManager.doStep(field, MakeGuessCommand(solution, guess))
-        field.append(Row(guess, Feedback(solution,guess)))
+    def createField(): IField = Field()
 
-    def undo: FieldInterface = undoManager.undoStep(field)
-    def redo: FieldInterface = undoManager.redoStep(field)
+    def makeGuess(guess: List[Color]): IField =
+        undoManager.doStep(field, MakeGuessCommand(guess))
+
+    def undo: IField = undoManager.undoStep(field)
+    def redo: IField = undoManager.redoStep(field)
+
+    def load: Unit = {
+        val injector = Guice.createInjector(new MastermindModule)
+        val fileio: IFileIO = injector.getInstance(classOf[IFileIO])
+        field = fileio.load
+        notifyObservers
+    }
+    def save: Unit = {
+        val injector = Guice.createInjector(new MastermindModule)
+        val fileio: IFileIO = injector.getInstance(classOf[IFileIO])
+        fileio.save(field)
+    }
 
     override def toString: String = field.toString

@@ -6,15 +6,17 @@ import net.codingwell.scalaguice.ScalaModule
 
 import aview.TUI
 import aview.GUI
-import controller.ControllerInterface
-import model.FieldInterface
+import controller.IController
+import model.field.IField
+import model.field.fieldBaseImpl.Color
 
 
 @main def main: Unit = 
     //val field = Field()
     //val controller = Controller(field)
     val injector = Guice.createInjector(new MastermindModule)
-    val controller = injector.getInstance(classOf[ControllerInterface])
+    val controller = injector.getInstance(classOf[IController])
+    controller.load
 
     val tui = TUI(controller)
     val gui = GUI(controller)

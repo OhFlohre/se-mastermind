@@ -1,5 +1,6 @@
 package de.htwg.se.mastermind
 package model
+package field
 package fieldBaseImpl
 
 enum Color(val code: String, val name: String):

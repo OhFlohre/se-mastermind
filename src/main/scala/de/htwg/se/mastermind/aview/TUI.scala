@@ -4,12 +4,12 @@ package aview
 import scala.io.StdIn.readLine
 
 import util.Observer
-import controller.ControllerInterface
-import model.fieldBaseImpl.Color
+import controller.IController
+import model.field.fieldBaseImpl.Color
 import scala.util.Success
 import scala.util.Failure
 
-class TUI(controller: ControllerInterface) extends Observer:
+class TUI(controller: IController) extends Observer:
     controller.add(this)
 
     def run =

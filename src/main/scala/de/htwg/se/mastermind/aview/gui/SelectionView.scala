@@ -9,11 +9,11 @@ import scalafx.scene.text._
 import scalafx.scene.control._
 import scalafx.util.StringConverter
 
-import controller.ControllerInterface
-import model.fieldBaseImpl.Color
+import controller.IController
+import model.field.fieldBaseImpl.Color
 
 
-class SelectionView(controller: ControllerInterface) extends HBox {
+class SelectionView(controller: IController) extends HBox {
 
     val selector1 = new ComboBox[Color](Color.all.toSeq) {
         converter = StringConverter.toStringConverter((color: Color) => color.name)

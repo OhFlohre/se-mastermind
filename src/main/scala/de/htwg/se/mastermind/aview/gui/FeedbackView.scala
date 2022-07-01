@@ -7,10 +7,10 @@ import scalafx.scene.shape._
 import scalafx.geometry._
 import scalafx.scene.paint.Color._
 
-import model.fieldBaseImpl.Feedback
+import model.field.IFeedback
 
 
-class FeedbackView(feedback: Feedback) extends GridPane {
+class FeedbackView(feedback: IFeedback) extends GridPane {
     val correctPositionPins = List.fill(feedback.correctPositions)(new Circle{
         radius = 10
         fill = Red

@@ -7,13 +7,16 @@ import com.google.inject.name.Names
 import com.google.inject.Binder
 import net.codingwell.scalaguice.ScalaModule
 
-import controller.ControllerInterface
+import controller.IController
 import controller.controllerBaseImpl.Controller
-import model.FieldInterface
-import model.fieldBaseImpl.Field
+import model.field.fieldBaseImpl.{Field, Color}
+import model.field.IField
+import model.fileio.fileioJsonImpl
+import model.fileio.IFileIO
 
 
 class MastermindModule extends AbstractModule {
   override def configure(): Unit =
-    bind(classOf[ControllerInterface]).toInstance(new Controller(new Field()))
+    bind(classOf[IController]).toInstance(Controller(Field()))
+    bind(classOf[IFileIO]).toInstance(fileioJsonImpl.FileIO())
 }
